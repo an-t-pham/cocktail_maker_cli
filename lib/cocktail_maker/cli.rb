@@ -2,17 +2,30 @@ class CocktailMaker::CLI
   def call
     puts "Welcome to Cocktail Maker! How would you like to search for the cocktail recipe?"
     get_user_input
-    # list_popular_menu
+    list_popular_menu
     # get_recipes(name)
     # get_recipes(ingredient)
   end
 
   def get_user_input
-     puts "1. I would like to have a look at the popular menu"
-     puts "2. I would like to search by name"
-     puts "3. I would like to search by ingredient"
-     puts "4. Surprise me"
+   puts "1. Have a look at the popular menu"
+   puts "2. Search by name"
+   puts "3. Search by ingredient"
+   puts "4. Surprise me!"
 
-     input = gets.strip
+   input = gets.strip
   end
+
+  def list_popular_menu
+    CocktailMaker::Popular_menu.new
+  end
+
+  def user_response
+    input = get_user_input.to_i
+      if input == 1
+        list_popular_menu
+      end
+  end
+
+
 end
