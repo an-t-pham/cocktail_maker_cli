@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
-puts "hello!"
+require_relative '../lib/cocktail_maker'
+
+CocktailMaker::CLI.new.call
