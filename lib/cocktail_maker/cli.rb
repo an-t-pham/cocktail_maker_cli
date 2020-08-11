@@ -19,7 +19,7 @@ class CocktailMaker::CLI
     puts "4. Surprise me!"
   end
 
-  def list_popular_menu
+  def get_user_cocktail
     @menu.display_menu
     puts @menu.get_your_cocktail
   end
@@ -28,7 +28,7 @@ class CocktailMaker::CLI
     display_actions
     input = gets.strip.to_i
       if input == 1
-        list_popular_menu
+        get_user_cocktail
       end
   end
 

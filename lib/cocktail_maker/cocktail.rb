@@ -3,7 +3,15 @@ class CocktailMaker::Cocktail
   @@all = []
   def initialize(name)
     @name = name
+    save
+  end
+
+  def save
     @@all << self
+  end
+
+  def self.create(cocktail_data)
+    self.new(cocktail_data["strDrink"])
   end
 
   def self.make_cocktail(name)
@@ -11,22 +19,31 @@ class CocktailMaker::Cocktail
     the_cocktail = JSON.parse(result)
     final_cocktail = nil
     the_cocktail["drinks"].each do |drink|
-     final_cocktail = {
-        :name => drink["strDrink"],
-        :glass => drink["strGlass"],
-        :video => drink["strVideo"],
-        :image => drink["strDrinkThumb"],
-        :instruction => drink["strInstructions"],
-        :ingredient1 => drink["strIngredient1"],
-        :measure1 => drink["strMeasure1"],
-      }
+      self.create(drink)
+    #  final_cocktail = {
+    #     :name => drink["strDrink"],
+    #     :glass => drink["strGlass"],
+    #     :video => drink["strVideo"],
+    #     :image => drink["strDrinkThumb"],
+    #     :instruction => drink["strInstructions"],
+    #     # :ingredient1 => drink["strIngredient1"],
+    #     # :measure1 => drink["strMeasure1"],
+    #   }
     end
-   final_cocktail
+    binding.pry
+      # the_cocktail["drinks"].each.with_index(1) do |drink, index|
+      # final_cocktail = {
+      #   :ingredient => drink["strIngredient#{index}"],
+      #   :measure => drink["strMeasure#{index}"]
+      #   }
+      #   binding.pry
+      # end
+      #
+      #  final_cocktail
   end
 
 
-  def self.make_cocktail_complete(name)
-    c = self.make_cocktail(name)
+
 
 
 
