@@ -1,8 +1,14 @@
 class CocktailMaker::Cocktail
-  attr_accessor :name, :ingredient
+  attr_accessor :name, :ingredients, :glass, :video_url, :image_url, :instruction, :measures
   @@all = []
-  def initialize(name)
+  def initialize(name, glass, video_url, image_url, instruction)
     @name = name
+    @glass = glass
+    @video_url = video_url
+    @image_url = image_url
+    @instruction = instruction
+    @ingredients = []
+    @measures = []
     save
   end
 
@@ -11,7 +17,20 @@ class CocktailMaker::Cocktail
   end
 
   def self.create(cocktail_data)
-    self.new(cocktail_data["strDrink"])
+    new_cocktail = self.new(cocktail_data["strDrink"], cocktail_data["strGlass"],cocktail_data["strVideo"], cocktail_data["strDrinkThumb"], cocktail_data["strInstructions"])
+    counter = 1
+    until cocktail_data["strIngredient#{counter}"] == nil
+      new_cocktail.ingredients << cocktail_data["strIngredient#{counter}"]
+      counter += 1
+    end
+
+    num = 1
+    until cocktail_data["strMeasure#{num}"] == nil
+      new_cocktail.measures << cocktail_data["strMeasure#{num}"]
+      num += 1
+    end
+    new_cocktail
+    
   end
 
   def self.make_cocktail(name)
@@ -19,31 +38,10 @@ class CocktailMaker::Cocktail
     the_cocktail = JSON.parse(result)
     final_cocktail = nil
     the_cocktail["drinks"].each do |drink|
-      self.create(drink)
-    #  final_cocktail = {
-    #     :name => drink["strDrink"],
-    #     :glass => drink["strGlass"],
-    #     :video => drink["strVideo"],
-    #     :image => drink["strDrinkThumb"],
-    #     :instruction => drink["strInstructions"],
-    #     # :ingredient1 => drink["strIngredient1"],
-    #     # :measure1 => drink["strMeasure1"],
-    #   }
+      final_cocktail = self.create(drink)
     end
-    binding.pry
-      # the_cocktail["drinks"].each.with_index(1) do |drink, index|
-      # final_cocktail = {
-      #   :ingredient => drink["strIngredient#{index}"],
-      #   :measure => drink["strMeasure#{index}"]
-      #   }
-      #   binding.pry
-      # end
-      #
-      #  final_cocktail
+    final_cocktail
   end
-
-
-
 
 
 
