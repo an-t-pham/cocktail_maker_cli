@@ -9,7 +9,6 @@ class CocktailMaker::Cocktail
     @instruction = instruction
     @ingredients = []
     @measures = []
-    save
   end
 
   def save
@@ -29,8 +28,7 @@ class CocktailMaker::Cocktail
       new_cocktail.measures << cocktail_data["strMeasure#{num}"]
       num += 1
     end
-    new_cocktail
-    
+    new_cocktail.save
   end
 
   def self.make_cocktail(name)
@@ -41,7 +39,23 @@ class CocktailMaker::Cocktail
       final_cocktail = self.create(drink)
     end
     final_cocktail
+    ingre = nil
+    index = 0
+    final_cocktail.first.ingredients.each do |ingredient|
+      ingre = {
+              ingredient => final_cocktail.first.measures[index]
+              }
+      index += 1
+    end
+    ingre
+    puts "1. Name: #{final_cocktail.first.name}"
+    puts "2. Glass: #{final_cocktail.first.glass}"
+    puts "3. Video instruction: #{final_cocktail.first.video_url}"
+    puts "4. Image: #{final_cocktail.first.image_url}"
+    puts "5. Instruction: #{final_cocktail.first.instruction}"
+    puts "6. Ingredients: #{ingre}"
   end
+
 
 
 
