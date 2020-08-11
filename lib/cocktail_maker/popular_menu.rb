@@ -15,9 +15,9 @@ def get_your_cocktail
   input = gets.strip
   cocktail = MENU[input.to_i - 1]
   #TODO: find a cocktail
-  # result = CocktailMaker::Cocktail.make_cocktail(cocktail)
+  result = CocktailMaker::Cocktail.make_cocktail(cocktail)
   #result = CocktailMaker::API.get_by_name(cocktail)
-  #  binding.pry
+  # binding.pry
 end
 
 
