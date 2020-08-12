@@ -29,6 +29,10 @@ class CocktailMaker::CLI
     input = gets.strip.to_i
       if input == 1
         get_user_cocktail
+      elsif input == 2
+        puts "Please type your favourite cocktail!"
+        name = gets.strip
+        CocktailMaker::Cocktail.make_cocktail(name)
       end
   end
 
