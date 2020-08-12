@@ -1,5 +1,4 @@
 class CocktailMaker::Menu
-
    def initialize(menu)
      @menu = menu
    end
@@ -18,6 +17,4 @@ class CocktailMaker::Menu
      cocktail = @menu[input.to_i - 1]
      result = CocktailMaker::Cocktail.make_cocktail(cocktail)
    end
-
-
 end
