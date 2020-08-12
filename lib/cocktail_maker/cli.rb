@@ -24,11 +24,17 @@ class CocktailMaker::CLI
     puts @menu.get_your_cocktail
   end
 
-  def get_user_cocktail_by_name
+  def get_cocktail_by_name
     puts "Please type the name of your favourite cocktail!"
     name = gets.strip
     the_cocktail = CocktailMaker::Cocktail.make_cocktail(name)
 
+  end
+
+  def get_cocktail_by_ingredient
+    puts "Please type the ingredient"
+    ingredient = gets.strip
+    CocktailMaker::Cocktail.search_by_ingredient(ingredient)
   end
 
   def get_user_move
@@ -37,7 +43,9 @@ class CocktailMaker::CLI
       if input == 1
         get_user_cocktail
       elsif input == 2
-        get_user_cocktail_by_name
+        get_cocktail_by_name
+      elsif input == 3
+        get_cocktail_by_ingredient
       end
   end
 

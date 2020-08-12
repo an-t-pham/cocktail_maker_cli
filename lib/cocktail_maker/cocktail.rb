@@ -55,11 +55,27 @@ class CocktailMaker::Cocktail
     puts "4. Ingredients: #{ingre}"
     puts "5. Instruction: #{final_cocktail.first.instruction}"
 
-  else
-    puts "No result found for #{name}"
+     else
+      puts "No result found for #{name}"
+    end
   end
 
- end
+  def self.search_by_ingredient(ingredient)
+    result = CocktailMaker::API.get_by_ingredient(ingredient)
+    cocktail = JSON.parse(result)
+    matching_cocktail = []
+    cocktail["drinks"].each do |drink|
+      matching_cocktail << drink["strDrink"]
+      # i_cocktail = self.make_cocktail(drink["strDrink"])
+    end
+   matching_cocktail
+   puts "Here are the matching cocktails of your ingredient"
+     matching_cocktail.each.with_index(1) do |cocktail, index|
+        puts "#{index}. #{cocktail}"
+    end
+
+  #  binding.pry
+  end
 
 
 end
