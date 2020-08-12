@@ -24,15 +24,20 @@ class CocktailMaker::CLI
     puts @menu.get_your_cocktail
   end
 
+  def get_user_cocktail_by_name
+    puts "Please type the name of your favourite cocktail!"
+    name = gets.strip
+    the_cocktail = CocktailMaker::Cocktail.make_cocktail(name)
+
+  end
+
   def get_user_move
     display_actions
     input = gets.strip.to_i
       if input == 1
         get_user_cocktail
       elsif input == 2
-        puts "Please type your favourite cocktail!"
-        name = gets.strip
-        CocktailMaker::Cocktail.make_cocktail(name)
+        get_user_cocktail_by_name
       end
   end
 

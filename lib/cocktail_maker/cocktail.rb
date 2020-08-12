@@ -33,11 +33,14 @@ class CocktailMaker::Cocktail
 
   def self.make_cocktail(name)
     result = CocktailMaker::API.get_by_name(name)
-    the_cocktail = JSON.parse(result)
-    final_cocktail = nil
-    the_cocktail["drinks"].each do |drink|
-      final_cocktail = self.create(drink)
-    end
+
+    if result != "{\"drinks\":null}"
+      the_cocktail = JSON.parse(result)
+      final_cocktail = nil
+         the_cocktail["drinks"].each do |drink|
+            final_cocktail = self.create(drink)
+         end
+
     final_cocktail
     ingre = {}
     index = 0
@@ -51,7 +54,12 @@ class CocktailMaker::Cocktail
     puts "3. Image: #{final_cocktail.first.image_url}"
     puts "4. Ingredients: #{ingre}"
     puts "5. Instruction: #{final_cocktail.first.instruction}"
+
+  else
+    puts "No result found for #{name}"
   end
+
+ end
 
 
 end
