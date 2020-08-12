@@ -1,15 +1,14 @@
 class CocktailMaker::CLI
+  MENU = ["Cosmopolitan", "Long Island Iced Tea", "Mai tai", "Margarita", "Martini", "Mojito", "Negroni", "Pina Colada", "Tequila Sunrise", "Whiskey Sour"]
   attr_accessor :menu
 
   def initialize
-    @menu = CocktailMaker::Popular_menu.new
+    @menu = CocktailMaker::Menu.new(MENU)
   end
 
   def call
     puts "Welcome to Cocktail Maker! How would you like to search for the cocktail recipe?"
     get_user_move
-    # get_recipes(name)
-    # get_recipes(ingredient)
   end
 
   def display_actions
@@ -19,7 +18,8 @@ class CocktailMaker::CLI
     puts "4. Surprise me!"
   end
 
-  def get_user_cocktail
+  def get_cocktail_by_menu
+    puts "Here are the top 10 cocktails of 2020"
     @menu.display_menu
     puts @menu.get_your_cocktail
   end
@@ -41,7 +41,7 @@ class CocktailMaker::CLI
     display_actions
     input = gets.strip.to_i
       if input == 1
-        get_user_cocktail
+        get_cocktail_by_menu
       elsif input == 2
         get_cocktail_by_name
       elsif input == 3

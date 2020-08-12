@@ -70,9 +70,12 @@ class CocktailMaker::Cocktail
     end
    matching_cocktail
    puts "Here are the matching cocktails of your ingredient"
-     matching_cocktail.each.with_index(1) do |cocktail, index|
-        puts "#{index}. #{cocktail}"
-    end
+   new_menu = CocktailMaker::Menu.new(matching_cocktail)
+   new_menu.display_menu
+   puts new_menu.get_your_cocktail
+    #  matching_cocktail.each.with_index(1) do |cocktail, index|
+    #     puts "#{index}. #{cocktail}"
+    # end
 
   #  binding.pry
   end
