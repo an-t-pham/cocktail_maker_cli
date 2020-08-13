@@ -1,10 +1,10 @@
 class CocktailMaker::Cocktail
-  attr_accessor :name, :ingredients, :glass, :video_url, :image_url, :instruction, :measures
+  attr_accessor :name, :type, :ingredients, :glass, :video_url, :image_url, :instruction, :measures
   @@all = []
-  def initialize(name, glass, image_url, instruction)
+  def initialize(name, type, glass, image_url, instruction)
     @name = name
+    @type = type
     @glass = glass
-
     @image_url = image_url
     @instruction = instruction
     @ingredients = []
@@ -16,7 +16,7 @@ class CocktailMaker::Cocktail
   end
 
   def self.create(cocktail_data)
-    new_cocktail = self.new(cocktail_data["strDrink"], cocktail_data["strGlass"], cocktail_data["strDrinkThumb"], cocktail_data["strInstructions"])
+    new_cocktail = self.new(cocktail_data["strDrink"], cocktail_data["strAlcoholic"], cocktail_data["strGlass"], cocktail_data["strDrinkThumb"], cocktail_data["strInstructions"])
     counter = 1
     until cocktail_data["strIngredient#{counter}"] == nil
       new_cocktail.ingredients << cocktail_data["strIngredient#{counter}"]
@@ -50,10 +50,11 @@ class CocktailMaker::Cocktail
     end
 
     puts "1. Name: #{final_cocktail.first.name}"
-    puts "2. Glass: #{final_cocktail.first.glass}"
-    puts "3. Image: #{final_cocktail.first.image_url}"
-    puts "4. Ingredients: #{ingre}"
-    puts "5. Instruction: #{final_cocktail.first.instruction}"
+    puts "2. Type: #{final_cocktail.first.type}"
+    puts "3. Glass: #{final_cocktail.first.glass}"
+    puts "4. Image: #{final_cocktail.first.image_url}"
+    puts "5. Ingredients: #{ingre}"
+    puts "6. Instruction: #{final_cocktail.first.instruction}"
 
      else
       puts "No result found for #{name}"
