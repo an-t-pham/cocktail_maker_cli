@@ -37,17 +37,28 @@ class CocktailMaker::Cocktail
     if result != "{\"drinks\":null}"
       the_cocktail = JSON.parse(result)
       final_cocktail = nil
+      final_list = []
          the_cocktail["drinks"].each do |drink|
             final_cocktail = self.create(drink)
+            final_list << drink["strDrink"]
          end
 
-    final_cocktail
-    ingre = {}
-    index = 0
-    final_cocktail.first.ingredients.each do |ingredient|
-      ingre[ingredient] = final_cocktail.first.measures[index]
-      index += 1
-    end
+      final_cocktail
+      final_list
+
+       if final_list.count > 1
+          puts "Please pick a cocktail"
+          final_menu = CocktailMaker::Menu.new(final_list)
+          final_menu.display_menu
+          # binding.pry
+        end
+          # puts final_menu.get_your_cocktail
+          # ingre = {}
+          # index = 0
+          # final_cocktail.first.ingredients.each do |ingredient|
+          #   ingre[ingredient] = final_cocktail.first.measures[index]
+          #   index += 1
+          # end
 
     puts "1. Name: #{final_cocktail.first.name}"
     puts "2. Type: #{final_cocktail.first.type}"
@@ -70,16 +81,15 @@ class CocktailMaker::Cocktail
      cocktail["drinks"].each do |drink|
       matching_cocktail << drink["strDrink"]
      end
-   matching_cocktail
-    puts "Here are the matching cocktails of your ingredient"
-    new_menu = CocktailMaker::Menu.new(matching_cocktail)
-    new_menu.display_menu
-    puts new_menu.get_your_cocktail
+     matching_cocktail
+
+       puts "Here are the matching cocktails of your ingredient"
+       new_menu = CocktailMaker::Menu.new(matching_cocktail)
+       new_menu.display_menu
+       puts new_menu.get_your_cocktail
       else
        puts "No result found for #{ingredient}"
      end
    end
-
-
 
 end

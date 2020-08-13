@@ -9,8 +9,6 @@ class CocktailMaker::Menu
      end
    end
 
-
-
    def get_your_cocktail
      puts "Please pick your favourite cocktail!"
      input = gets.strip
