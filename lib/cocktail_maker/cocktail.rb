@@ -53,11 +53,10 @@ class CocktailMaker::Cocktail
 
   def self.find(cocktail_name)
     a = @@all.filter { |cocktail| cocktail.name == cocktail_name }
-
   end
 
-  def self.make_cocktail(name)
-    result = CocktailMaker::API.get_by_name(name)
+  def self.find_or_create(cocktail_name)
+    result = CocktailMaker::API.get_by_name(cocktail_name)
 
     if result != "{\"drinks\":null}"
       the_cocktail = JSON.parse(result)
@@ -70,17 +69,6 @@ class CocktailMaker::Cocktail
 
       final_cocktail
       final_list
-
-
-
-
-      #  if final_list.count > 1
-      #     puts "Please pick a cocktail"
-      #     final_menu = CocktailMaker::Menu.new(final_list)
-      #     final_menu.display_menu
-      #
-      #   end
-          # puts final_menu.get_your_cocktail
 
 
      else
@@ -102,7 +90,10 @@ class CocktailMaker::Cocktail
            puts "Here are the matching cocktails of your ingredient"
            new_menu = CocktailMaker::Menu.new(matching_cocktail)
            new_menu.display_menu
-           puts new_menu.get_your_cocktail
+           r = new_menu.get_user_decision
+           this_cocktail = CocktailMaker::Cocktail.find(r)
+           binding.pry
+           this_cocktail.first.display_cocktail
           else
            puts "No result found for #{ingredient}"
          end

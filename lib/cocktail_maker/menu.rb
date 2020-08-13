@@ -1,6 +1,6 @@
 class CocktailMaker::Menu
   attr_accessor :menu
-  
+
    def initialize(menu)
      @menu = menu
    end
@@ -11,18 +11,35 @@ class CocktailMaker::Menu
      end
    end
 
-   def get_your_cocktail
+   def get_cocktail_w_name
       if @menu.count > 1
-        puts "Please pick your favourite cocktail!"
-        input = gets.strip
-        cocktail = @menu[input.to_i - 1]
-        result = CocktailMaker::Cocktail.find(cocktail)
-
-        result.first.display_cocktail
+        get_your_cocktail(get_user_decision)
       else
-        result1 = CocktailMaker::Cocktail.find(@menu.first)
-        result1.first.display_cocktail
+        get_your_cocktail(@menu.first)
       end
+   end
+
+   def get_cocktail_by_pop_menu
+       result = CocktailMaker::Cocktail.find_or_create(get_user_decision)
+       new_menu = CocktailMaker::Menu.new(result)
+       new_menu.display_menu
+       if new_menu.menu.count > 1
+         a = new_menu.get_user_decision
+         get_your_cocktail(a)
+       else
+         get_your_cocktail(new_menu.menu.first)
+       end
+   end
+
+   def get_your_cocktail(name)
+     r = CocktailMaker::Cocktail.find(name)
+     r.first.display_cocktail
+   end
+
+   def get_user_decision
+     puts "Please pick your favourite cocktail!"
+     input = gets.strip
+     cocktail = @menu[input.to_i - 1]
    end
 
 
