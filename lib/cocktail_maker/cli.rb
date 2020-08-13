@@ -3,7 +3,7 @@ class CocktailMaker::CLI
   attr_accessor :menu
 
   def initialize
-    @menu = CocktailMaker::Menu.new(MENU)
+    @popular = CocktailMaker::Menu.new(MENU)
   end
 
   def call
@@ -20,8 +20,9 @@ class CocktailMaker::CLI
 
   def get_cocktail_by_menu
     puts "Here are the top 10 cocktails of 2020"
-    @menu.display_menu
-    puts @menu.get_your_cocktail
+    @popular.display_menu
+    binding.pry
+    puts @popular_menu.get_your_cocktail
   end
 
   def get_cocktail_by_name

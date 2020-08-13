@@ -47,12 +47,13 @@ class CocktailMaker::Cocktail
       new_cocktail.measures << cocktail_data["strMeasure#{num}"]
       num += 1
     end
+
     new_cocktail.save
   end
 
   def self.find(cocktail_name)
     a = @@all.filter { |cocktail| cocktail.name == cocktail_name }
-    binding.pry
+
   end
 
   def self.make_cocktail(name)
@@ -63,12 +64,13 @@ class CocktailMaker::Cocktail
       final_cocktail = nil
       final_list = []
          the_cocktail["drinks"].each do |drink|
-            final_cocktail = self.create(drink) unless self.find(drink["strDrink"])
+            final_cocktail = self.create(drink) unless self.find(drink["strDrink"]).count > 0
             final_list << drink["strDrink"]
          end
 
       final_cocktail
       final_list
+
 
 
 
