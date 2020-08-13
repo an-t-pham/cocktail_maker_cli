@@ -28,7 +28,9 @@ class CocktailMaker::CLI
     puts "Please type the name of your favourite cocktail!"
     name = gets.strip
     the_cocktail = CocktailMaker::Cocktail.make_cocktail(name)
-
+    m = CocktailMaker::Menu.new(the_cocktail)
+    m.display_menu
+    puts m.get_your_cocktail
   end
 
   def get_cocktail_by_ingredient
