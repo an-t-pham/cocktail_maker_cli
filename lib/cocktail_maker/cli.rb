@@ -45,19 +45,25 @@ class CocktailMaker::CLI
     display_actions
     input = gets.strip.to_i
       if input == 1
+        puts
         get_cocktail_by_menu
         puts
         get_user_move
       elsif input == 2
+        puts
         get_cocktail_by_name
         puts
         get_user_move
       elsif input == 3
+        puts
         get_cocktail_by_ingredient
         puts
         get_user_move
       elsif input == 4
-         CocktailMaker::Cocktail.random_cocktail
+        puts
+        CocktailMaker::Cocktail.random_cocktail
+        puts
+        get_user_move
        elsif input == 5
        else
          puts "Please pick a number from the list"
