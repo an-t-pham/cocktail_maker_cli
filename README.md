@@ -1,8 +1,10 @@
 # CocktailMaker
 
-Find out new cocktail recipes!
+Cocktail Maker is a gem that provide users cocktail's recipes. This gem's data is based on API from https://www.thecocktaildb.com/api.php
 
-TODO: Delete this and the text above, and describe your gem
+## Description:
+
+Users will be shown a list of actions along to choose from in order to get their favorite cocktail's recipe. First of all, users can have a look at the popular menu by choosing 1 so they can get a recipe from the existing menu. Secondly, users will be able to search for a specific recipe by name via 2. Thirdly, users will also be able to search for all recipes by ingredient and pick their favorite from there. Another option that users can choose from is "Surprise me!" option which will give them a random cocktail. Users will be able to exit the program anytime via 5. Everything will be looped back to the main menu after the chosen recipe has shown. 
 
 ## Installation
 
