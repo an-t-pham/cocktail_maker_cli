@@ -7,7 +7,6 @@ class CocktailMaker::CLI
   end
 
   def call
-    puts "Welcome to Cocktail Maker! How would you like to search for the cocktail recipe?"
     get_user_move
   end
 
@@ -16,6 +15,7 @@ class CocktailMaker::CLI
     puts "2. Search by name"
     puts "3. Search by ingredient"
     puts "4. Surprise me!"
+    puts "5. Exit"
   end
 
   def get_cocktail_by_menu
@@ -39,15 +39,29 @@ class CocktailMaker::CLI
     CocktailMaker::Cocktail.search_by_ingredient(ingredient)
   end
 
+
   def get_user_move
+    puts "Welcome to Cocktail Maker! How would you like to search for the cocktail recipe?"
     display_actions
     input = gets.strip.to_i
       if input == 1
         get_cocktail_by_menu
+        puts
+        get_user_move
       elsif input == 2
         get_cocktail_by_name
+        puts
+        get_user_move
       elsif input == 3
         get_cocktail_by_ingredient
+        puts
+        get_user_move
+      elsif input == 4
+         CocktailMaker::Cocktail.random_cocktail
+       elsif input == 5
+       else
+         puts "Please pick a number from the list"
+         get_user_move
       end
   end
 

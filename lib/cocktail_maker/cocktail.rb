@@ -73,7 +73,7 @@ class CocktailMaker::Cocktail
     end
   end
 
-      def self.search_by_ingredient(ingredient)
+    def self.search_by_ingredient(ingredient)
           result = CocktailMaker::API.get_by_ingredient(ingredient)
         if result != ""
            cocktail = JSON.parse(result)
@@ -95,6 +95,14 @@ class CocktailMaker::Cocktail
           else
            puts "No result found for #{ingredient}"
          end
+   end
+
+   def self.random_cocktail
+     result = CocktailMaker::API.get_random_cocktail
+     new_cocktail = JSON.parse(result)
+     final_cocktail = CocktailMaker::Cocktail.find_or_create(new_cocktail["drinks"].first["strDrink"])
+     m = CocktailMaker::Menu.new(final_cocktail)
+     m.get_cocktail_w_name
    end
 
 end

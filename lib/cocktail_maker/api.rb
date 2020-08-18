@@ -11,4 +11,9 @@ class CocktailMaker::API
     uri = URI("#{BASE_URL}/filter.php?i=#{ingredient}")
     Net::HTTP.get(uri)
   end
+
+  def self.get_random_cocktail
+    uri = URI("#{BASE_URL}/random.php")
+    Net::HTTP.get(uri)
+  end
 end
