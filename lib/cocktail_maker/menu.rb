@@ -7,7 +7,7 @@ class CocktailMaker::Menu
 
    def display_menu
      @menu.each.with_index(1) do |cocktail, index|
-      puts "#{index}. #{cocktail}"
+      puts "#{index}. #{cocktail}".colorize(:light_magenta)
      end
    end
 

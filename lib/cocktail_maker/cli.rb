@@ -7,19 +7,20 @@ class CocktailMaker::CLI
   end
 
   def call
+    puts "\nWelcome to Cocktail Maker!\n".colorize(:red)
     get_user_move
   end
 
   def display_actions
-    puts "1. Have a look at the popular menu"
-    puts "2. Search by name"
-    puts "3. Search by ingredient"
-    puts "4. Surprise me!"
-    puts "5. Exit"
+    puts "1. Have a look at the popular menu".colorize(:light_cyan)
+    puts "2. Search by name".colorize(:light_cyan)
+    puts "3. Search by ingredient".colorize(:light_cyan)
+    puts "4. Surprise me!".colorize(:light_cyan)
+    puts "5. Exit".colorize(:light_cyan)
   end
 
   def get_cocktail_by_menu
-    puts "Here are the top 10 cocktails of 2020"
+    puts "Here are the top 10 cocktails of 2020".colorize(:light_red)
     @popular_menu.display_menu
     @popular_menu.get_cocktail_by_pop_menu
   end
@@ -41,7 +42,7 @@ class CocktailMaker::CLI
 
 
   def get_user_move
-    puts "Welcome to Cocktail Maker! How would you like to search for the cocktail recipe?"
+    puts "How would you like to search for the cocktail recipe?".colorize(:light_blue)
     display_actions
     input = gets.strip.to_i
       if input == 1
@@ -66,7 +67,7 @@ class CocktailMaker::CLI
         get_user_move
        elsif input == 5
        else
-         puts "Please pick a number from the list"
+         puts "\nPlease pick a number from the list\n".colorize(:red)
          get_user_move
       end
   end

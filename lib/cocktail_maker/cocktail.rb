@@ -26,12 +26,12 @@ class CocktailMaker::Cocktail
   end
 
   def display_cocktail
-    puts "1. Name: #{@name}"
-    puts "2. Type: #{@type}"
-    puts "3. Glass: #{@glass}"
-    puts "4. Image: #{@image_url}"
-    puts "5. Ingredients: #{self.full_ingredient}"
-    puts "6. Instruction: #{@instruction}"
+    puts "1. Name:".colorize(:light_red) + " " +"#{@name}".colorize(:cyan)
+    puts "2. Type:".colorize(:light_red) + " " + "#{@type}".colorize(:cyan)
+    puts "3. Glass:".colorize(:light_red) + " " + "#{@glass}".colorize(:cyan)
+    puts "4. Image:".colorize(:light_red) + " " + "#{@image_url}".colorize(:cyan)
+    puts "5. Ingredients:".colorize(:light_red) + " " + "#{self.full_ingredient}".colorize(:cyan)
+    puts "6. Instruction:".colorize(:light_red) + " " + "#{@instruction}".colorize(:cyan)
   end
 
   def self.create(cocktail_data)
