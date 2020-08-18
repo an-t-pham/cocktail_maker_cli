@@ -66,11 +66,8 @@ class CocktailMaker::Cocktail
             final_cocktail = self.create(drink) unless self.find(drink["strDrink"]).count > 0
             final_list << drink["strDrink"]
          end
-
       final_cocktail
       final_list
-
-
      else
       puts "No result found for #{name}"
     end
@@ -82,18 +79,19 @@ class CocktailMaker::Cocktail
            cocktail = JSON.parse(result)
             matching_cocktail = []
 
-         cocktail["drinks"].each do |drink|
-          matching_cocktail << drink["strDrink"]
-         end
-         matching_cocktail
+            cocktail["drinks"].each do |drink|
+            matching_cocktail << drink["strDrink"]
+             end
+            matching_cocktail
 
            puts "Here are the matching cocktails of your ingredient"
            new_menu = CocktailMaker::Menu.new(matching_cocktail)
            new_menu.display_menu
            r = new_menu.get_user_decision
-           this_cocktail = CocktailMaker::Cocktail.find(r)
-           binding.pry
-           this_cocktail.first.display_cocktail
+           this_cocktail = CocktailMaker::Cocktail.find_or_create(r)
+           m = CocktailMaker::Menu.new(this_cocktail)
+           m.get_cocktail_w_name
+
           else
            puts "No result found for #{ingredient}"
          end

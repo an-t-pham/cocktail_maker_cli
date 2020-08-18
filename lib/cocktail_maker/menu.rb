@@ -20,6 +20,7 @@ class CocktailMaker::Menu
    end
 
    def get_cocktail_by_pop_menu
+     
        result = CocktailMaker::Cocktail.find_or_create(get_user_decision)
        new_menu = CocktailMaker::Menu.new(result)
        new_menu.display_menu
