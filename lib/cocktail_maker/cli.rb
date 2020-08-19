@@ -1,6 +1,6 @@
 class CocktailMaker::CLI
   MENU = ["Cosmopolitan", "Long Island Iced Tea", "Mai tai", "Margarita", "Martini", "Mojito", "Negroni", "Pina Colada", "Tequila Sunrise", "Whiskey Sour"]
-  attr_accessor :menu
+  
 
   def initialize
     @popular_menu = CocktailMaker::Menu.new(MENU)
