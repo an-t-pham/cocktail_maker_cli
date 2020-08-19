@@ -14,6 +14,7 @@ class CocktailMaker::Menu
    def get_cocktail_w_name
       if @menu.count > 1
         puts
+        display_menu
         get_your_cocktail(get_user_decision)
       else
         puts

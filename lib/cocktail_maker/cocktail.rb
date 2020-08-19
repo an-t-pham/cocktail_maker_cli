@@ -56,6 +56,7 @@ class CocktailMaker::Cocktail
   end
 
   def self.find_or_create(cocktail_name)
+
     result = CocktailMaker::API.get_by_name(cocktail_name)
 
     if result != "{\"drinks\":null}"
