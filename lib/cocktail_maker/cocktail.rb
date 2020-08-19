@@ -67,11 +67,12 @@ class CocktailMaker::Cocktail
             final_cocktail = self.create(drink) unless self.find(drink["strDrink"]).count > 0
             final_list << drink["strDrink"]
          end
-      final_cocktail
-      final_list
      else
-      puts "No result found for #{name}"
+      puts "No result found for #{cocktail_name}"
+      final_cocktail = nil
     end
+    final_cocktail
+    final_list
   end
 
     def self.search_by_ingredient(ingredient)
@@ -91,6 +92,7 @@ class CocktailMaker::Cocktail
            r = new_menu.get_user_decision
            this_cocktail = CocktailMaker::Cocktail.find_or_create(r)
            m = CocktailMaker::Menu.new(this_cocktail)
+           m.display_menu
            m.get_cocktail_w_name
 
           else

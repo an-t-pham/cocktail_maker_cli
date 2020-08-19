@@ -1,6 +1,6 @@
 class CocktailMaker::CLI
   MENU = ["Cosmopolitan", "Long Island Iced Tea", "Mai tai", "Margarita", "Martini", "Mojito", "Negroni", "Pina Colada", "Tequila Sunrise", "Whiskey Sour"]
-  
+
 
   def initialize
     @popular_menu = CocktailMaker::Menu.new(MENU)
@@ -29,9 +29,14 @@ class CocktailMaker::CLI
     puts "Please type the name of your favourite cocktail!"
     name = gets.strip
     the_cocktail = CocktailMaker::Cocktail.find_or_create(name)
-    m = CocktailMaker::Menu.new(the_cocktail)
-    m.display_menu
-    puts m.get_cocktail_w_name
+
+    if the_cocktail == nil
+      get_cocktail_by_name
+    else
+       m = CocktailMaker::Menu.new(the_cocktail)
+       m.display_menu
+       puts m.get_cocktail_w_name
+     end
   end
 
   def get_cocktail_by_ingredient
@@ -67,7 +72,7 @@ class CocktailMaker::CLI
         get_user_move
        elsif input == 5
        else
-         puts "\nPlease pick a number from the list\n".colorize(:red)
+         puts "Sorry! I do not understand. Please enter a number from the list\n".colorize(:red)
          get_user_move
       end
   end
