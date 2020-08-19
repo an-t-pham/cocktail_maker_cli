@@ -30,12 +30,10 @@ class CocktailMaker::CLI
     name = gets.strip
     the_cocktail = CocktailMaker::Cocktail.find_or_create(name)
 
-    if the_cocktail == nil
-      get_cocktail_by_name
-    else
-       m = CocktailMaker::Menu.new(the_cocktail)
-       m.display_menu
-       puts m.get_cocktail_w_name
+    if the_cocktail != nil
+      m = CocktailMaker::Menu.new(the_cocktail)
+      m.display_menu
+      puts m.get_cocktail_w_name
      end
   end
 
