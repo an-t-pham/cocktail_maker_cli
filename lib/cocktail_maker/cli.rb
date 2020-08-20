@@ -48,6 +48,7 @@ class CocktailMaker::CLI
     puts "How would you like to search for the cocktail recipe?".colorize(:light_blue)
     display_actions
     input = gets.strip.to_i
+
       if input == 1
         puts
         get_cocktail_by_menu
@@ -74,6 +75,5 @@ class CocktailMaker::CLI
          get_user_move
       end
   end
-
 
 end

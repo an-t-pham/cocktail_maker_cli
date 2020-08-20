@@ -1,6 +1,7 @@
 class CocktailMaker::Cocktail
   attr_accessor :name, :type, :ingredients, :glass, :video_url, :image_url, :instruction, :measures
   @@all = []
+
   def initialize(name, type, glass, image_url, instruction)
     @name = name
     @type = type
@@ -36,6 +37,7 @@ class CocktailMaker::Cocktail
 
   def self.create(cocktail_data)
     new_cocktail = self.new(cocktail_data["strDrink"], cocktail_data["strAlcoholic"], cocktail_data["strGlass"], cocktail_data["strDrinkThumb"], cocktail_data["strInstructions"])
+
     counter = 1
     until cocktail_data["strIngredient#{counter}"] == nil
       new_cocktail.ingredients << cocktail_data["strIngredient#{counter}"]
@@ -56,7 +58,6 @@ class CocktailMaker::Cocktail
   end
 
   def self.find_or_create(cocktail_name)
-
     result = CocktailMaker::API.get_by_name(cocktail_name)
 
     if result != "{\"drinks\":null}"
@@ -71,29 +72,26 @@ class CocktailMaker::Cocktail
       puts "No result found for #{cocktail_name}"
       final_cocktail = nil
     end
+
     final_cocktail
     final_list
   end
 
     def self.search_by_ingredient(ingredient)
           result = CocktailMaker::API.get_by_ingredient(ingredient)
+
         if result != ""
            cocktail = JSON.parse(result)
-            matching_cocktail = []
-
-            cocktail["drinks"].each do |drink|
-            matching_cocktail << drink["strDrink"]
-             end
-            matching_cocktail
+           matching_cocktail = cocktail["drinks"].collect {|drink| drink["strDrink"]}
 
            puts "Here are the matching cocktails of your ingredient"
            new_menu = CocktailMaker::Menu.new(matching_cocktail)
            new_menu.display_menu
-           r = new_menu.get_user_decision
-           this_cocktail = CocktailMaker::Cocktail.find_or_create(r)
-           m = CocktailMaker::Menu.new(this_cocktail)
-           m.display_menu
-           m.get_cocktail_w_name
+           result = new_menu.get_user_decision
+           this_cocktail = CocktailMaker::Cocktail.find_or_create(result)
+           final_menu = CocktailMaker::Menu.new(this_cocktail)
+           final_menu.display_menu
+           final_menu.get_cocktail_w_name
 
           else
            puts "No result found for #{ingredient}"
