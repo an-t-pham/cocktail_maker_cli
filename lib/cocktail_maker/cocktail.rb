@@ -62,19 +62,15 @@ class CocktailMaker::Cocktail
 
     if result != "{\"drinks\":null}"
       the_cocktail = JSON.parse(result)
-      final_cocktail = nil
-      final_list = []
-         the_cocktail["drinks"].each do |drink|
-            final_cocktail = self.create(drink) unless self.find(drink["strDrink"]).count > 0
-            final_list << drink["strDrink"]
+    
+         the_cocktail["drinks"].map do |drink|
+            self.create(drink) unless self.find(drink["strDrink"]).count > 0
+            drink["strDrink"]
          end
      else
       puts "No result found for #{cocktail_name}"
-      final_cocktail = nil
     end
 
-    final_cocktail
-    final_list
   end
 
     def self.search_by_ingredient(ingredient)
@@ -105,5 +101,7 @@ class CocktailMaker::Cocktail
      m = CocktailMaker::Menu.new(final_cocktail)
      m.get_cocktail_w_name
    end
+
+
 
 end

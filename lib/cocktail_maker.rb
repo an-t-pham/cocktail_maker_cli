@@ -7,6 +7,7 @@ require_relative "./cocktail_maker/cocktail"
 require 'pry'
 require 'net/http'
 require 'colorize'
+require 'JSON'
 
 module CocktailMaker
   class Error < StandardError; end

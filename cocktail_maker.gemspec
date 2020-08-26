@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     spec.metadata["source_code_uri"] = "http://www.sample.com"
     spec.metadata["changelog_uri"] = "http://www.sample.com"
   else
-    raise "RubyGems 2.0 or newer is required to protect against " \
+    raise "RubyGems 2.0 or newer  is required to protect against " \
       "public gem pushes."
   end
 
@@ -39,6 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "pry"
-  spec.add_dependency "net/http"
   spec.add_dependency "colorize", "~> 0.8.1"
 end
